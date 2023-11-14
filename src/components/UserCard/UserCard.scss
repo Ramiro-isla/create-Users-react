@@ -1,0 +1,43 @@
+.user-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .user-cards {
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    margin: 20px;
+    border-radius: 10px;
+    .user-image {
+      width: 11vw;
+      height: 11vw;
+      border-radius: 100%;
+      object-fit: cover;
+      padding: 10px;
+    }
+    h2 {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    p {
+      font-size: 1.3rem;
+    }
+    div {
+      display: flex;
+      margin-bottom: 10px;
+      width: 100%;
+      justify-content: space-evenly;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        img {
+          width: 30px;
+        }
+      }
+    }
+  }
+}
