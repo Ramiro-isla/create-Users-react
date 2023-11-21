@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./UserForm.scss";
 
 const INITIAL_STATE = {
@@ -9,14 +9,14 @@ const INITIAL_STATE = {
 };
 const UserForm = ({ createUser }) => {
   const [form, setForm] = useState(INITIAL_STATE);
-  let div = document.getElementById("alert_form");
+  const [isAlertVisible, setAlertVisible] = useState(false);
   const submitForm = (event) => {
     event.preventDefault();
     if (!form.name || !form.lastName || !form.age || !form.image) {
-      div.style = "display: block";
+      setAlertVisible(true);
       return;
     } else {
-      div.style = "display: none";
+      setAlertVisible(false);
     }
     createUser(form);
     setForm(INITIAL_STATE);
@@ -32,7 +32,11 @@ const UserForm = ({ createUser }) => {
   return (
     <section className="form">
       <form onSubmit={submitForm}>
-        <div className="alert_form" id="alert_form">
+        <div
+          className="alert_form"
+          id="alert_form"
+          style={{ display: isAlertVisible ? "block" : "none" }}
+        >
           <h2>Faltan campos por completar</h2>
           <p>Por favor rellene todos los campos</p>
         </div>

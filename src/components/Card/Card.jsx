@@ -11,12 +11,17 @@ const Card = ({ deleteUser, editUser, user }) => {
       <div className="user-cards">
         <img src={user.image} alt={user.name} className="user-image" />
         <h2>
-          Nombre:
-          {user.name.length > 12
-            ? user.name.substring(0, 17) + "..."
+          Nombre:{" "}
+          {user.name.length > 8
+            ? user.name.substring(0, 8) + "..."
             : user.name}
         </h2>
-        <h2>{user.lastName}</h2>
+        <h2>
+          Apellido:{" "}
+          {user.lastName.length > 8
+            ? user.lastName.substring(0, 8) + "..."
+            : user.lastName}
+        </h2>
         <p>Edad: {user.age}</p>
 
         <div>
