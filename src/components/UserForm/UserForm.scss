@@ -10,6 +10,13 @@
     margin-top: 20px;
     color: red;
     text-align: center;
+    h2 {
+      font-size: 1.3rem;
+      text-align: center;
+    }
+    p {
+      font-size: 1.1rem;
+    }
   }
   form {
     display: flex;
@@ -72,7 +79,7 @@
 @media (max-width: 375px) {
   .form {
     form {
-      width: 18rem;
+      width: 20rem;
       h1 {
         font-size: 2rem;
       }

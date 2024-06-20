@@ -9,14 +9,14 @@ const INITIAL_STATE = {
 };
 const UserForm = ({ createUser }) => {
   const [form, setForm] = useState(INITIAL_STATE);
-  const [isAlertVisible, setAlertVisible] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const submitForm = (event) => {
     event.preventDefault();
     if (!form.name || !form.lastName || !form.age || !form.image) {
-      setAlertVisible(true);
+      setShowAlert(true);
       return;
     } else {
-      setAlertVisible(false);
+      setShowAlert(false);
     }
     createUser(form);
     setForm(INITIAL_STATE);
@@ -35,7 +35,7 @@ const UserForm = ({ createUser }) => {
         <div
           className="alert_form"
           id="alert_form"
-          style={{ display: isAlertVisible ? "block" : "none" }}
+          style={{ display: showAlert ? "block" : "none" }}
         >
           <h2>Faltan campos por completar</h2>
           <p>Por favor rellene todos los campos</p>

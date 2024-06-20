@@ -1,23 +1,21 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import "./Card.scss";
 
 const Card = ({ deleteUser, editUser, user }) => {
   const [isEditingMode, setIsEditingMode] = useState(false);
   const [form, setForm] = useState(user);
+  const [showAlert, setShowAlert] = useState(false);
 
   const renderCard = () => {
     return (
       <div className="user-cards">
         <img src={user.image} alt={user.name} className="user-image" />
         <h2>
-          Nombre:{" "}
-          {user.name.length > 8
-            ? user.name.substring(0, 8) + "..."
-            : user.name}
+          Nombre:
+          {user.name.length > 8 ? user.name.substring(0, 8) + "..." : user.name}
         </h2>
         <h2>
-          Apellido:{" "}
+          Apellido:
           {user.lastName.length > 8
             ? user.lastName.substring(0, 8) + "..."
             : user.lastName}
@@ -42,6 +40,7 @@ const Card = ({ deleteUser, editUser, user }) => {
       </div>
     );
   };
+
   const handleInput = (event) => {
     const { name, value } = event.target;
     setForm({
@@ -49,36 +48,35 @@ const Card = ({ deleteUser, editUser, user }) => {
       [name]: value,
     });
   };
+
   const submitForm = (event) => {
-    let div = document.getElementById("alert_form");
     event.preventDefault();
-    editUser(user, form);
-    setIsEditingMode(false);
     if (!form.name || !form.lastName || !form.age || !form.image) {
-      div.style = "display: block";
+      setShowAlert(true);
       return;
     } else {
-      div.style = "display: none";
+      setShowAlert(false);
+      editUser(user, form);
+      setIsEditingMode(false);
     }
   };
+
   const renderEditMode = () => {
     return (
       <div className="user-cards">
         <form onSubmit={submitForm}>
-          <div className="alert_edit_form" id="alert_form">
-            <h2>Faltan campos por completar</h2>
-            <p>Por favor rellene todos los campos</p>
-          </div>
+          {showAlert && (
+            <div className="alert_edit_form">
+              <h2>Faltan campos por completar</h2>
+              <p>Por favor rellene todos los campos</p>
+            </div>
+          )}
           <label>
             <p>Name</p>
             <input
               type="text"
               name="name"
-              value={
-                form.name.length > 12
-                  ? form.name.substring(0, 12) + "..."
-                  : form.name
-              }
+              value={form.name}
               onChange={handleInput}
             />
           </label>
@@ -118,6 +116,7 @@ const Card = ({ deleteUser, editUser, user }) => {
       </div>
     );
   };
+
   return (
     <div className="user-cards-container">
       {isEditingMode ? renderEditMode() : renderCard()}
